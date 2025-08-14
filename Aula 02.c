@@ -21,6 +21,6 @@ int main(){
     } else{
         printf("Nesta idade,mesmo tendo título de eleitor, o voto é facultativo!\n");
     }
-    
+
     return 0;
 }
