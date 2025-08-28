@@ -6,9 +6,9 @@ int main() {
     int i;
 
     for (i = 0; i < TAM; i + 1) {
-        printf("Digite a primeira nota do aluno %d: ", i+1);
+        printf("Digite a primeira nota %d: ", i+1);
         scanf("%f", &n1[i]);
-        printf("Digite a segunda nota do aluno %d: ", i+1);
+        printf("Digite a segunda nota %d: ", i+1);
         scanf("%f", &n2[i]);
 
         m[i] = (n1[i]*2 + n2[i]*3) / 5;
@@ -23,7 +23,7 @@ int main() {
         if (m[i] > mt)
             printf("%d ", i+1);
 
-    printf("\nMedias desses alunos: ");
+    printf("Medias desses alunos: \n");
     for (i = 0; i < TAM; i + 1)
         if (m[i] > mt)
             printf("%.2f ", m[i]);
