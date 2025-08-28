@@ -6,9 +6,9 @@ int main() {
     int i;
 
     for (i = 0; i < TAM; i + 1) {
-        printf("Digite a primeira nota %d: ", i+1);
+        printf("Digite a primeira nota %d: ", i+=1);
         scanf("%f", &n1[i]);
-        printf("Digite a segunda nota %d: ", i+1);
+        printf("Digite a segunda nota %d: ", i+=1);
         scanf("%f", &n2[i]);
 
         m[i] = (n1[i]*2 + n2[i]*3) / 5;
