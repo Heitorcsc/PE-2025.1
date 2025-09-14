@@ -1,0 +1,92 @@
+#include <stdio.h>
+#define MAX 50
+
+
+void inserirOrdenado(int *v, int *n, int valor){
+    if(*n >= MAX){
+        printf("Vetor cheio!\n");
+        return;
+    }
+    int i=*n-1;
+    while(i>=0 && v[i]>valor){
+        v[i+1]=v[i];
+        i--;
+    }
+    v[i+1]=valor;
+    (*n)++;
+}
+
+int buscaBinaria(int *v, int n, int valor){
+    int ini=0, fim=n-1;
+    while(ini<=fim){
+        int meio=(ini+fim)/2;
+        if(v[meio]==valor) return meio;
+        if(v[meio]<valor) ini=meio+1; else fim=meio-1;
+    }
+    return -1;
+}
+
+// Remove um elemento (se existir)
+void removerElemento(int *v, int *n, int valor){
+    int pos = buscaBinaria(v, *n, valor);
+    if(pos==-1){
+        printf("Nao encontrado.\n");
+        return;
+    }
+    for(int i=pos;i<*n-1;i++)
+        v[i]=v[i+1];
+    (*n)--;
+    printf("Removido.\n");
+}
+
+void imprimir(int *v, int n){
+    if(n==0){ printf("Vetor vazio\n"); return; }
+    for(int i=0;i<n;i++) printf("%d ", v[i]);
+    printf("\n");
+}
+
+int main(){
+    int v[MAX];
+    int n=0, tam, op, x;
+
+    do{
+        printf("Tamanho inicial (3 a 50): ");
+        scanf("%d",&tam);
+    }while(tam<3||tam>50);
+
+    printf("Digite %d numeros:\n", tam);
+    for(int i=0;i<tam;i++){
+        scanf("%d",&x);
+        inserirOrdenado(v,&n,x);
+    }
+
+    do{
+        printf("\n1-Imprimir\n2-Consultar\n3-Remover\n4-Inserir\n5-Sair\nOpcao: ");
+        scanf("%d",&op);
+        switch(op){
+            case 1: imprimir(v,n); break;
+            case 2:
+                printf("Valor: ");
+                scanf("%d",&x);
+                x = buscaBinaria(v,n,x);
+                printf("%d\n", x);
+                break;
+            case 3:
+                printf("Valor: ");
+                scanf("%d",&x);
+                removerElemento(v,&n,x);
+                break;
+            case 4:
+                printf("Valor: ");
+                scanf("%d",&x);
+                inserirOrdenado(v,&n,x);
+                break;
+            case 5:
+                printf("Encerrando.\n");
+                break;
+            default:
+                printf("Opcao invalida.\n");
+        }
+    }while(op!=5);
+    return 0;
+}
