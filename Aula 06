@@ -1,7 +1,6 @@
 #include <stdio.h>
 #define MAX 50
 
-
 void inserirOrdenado(int *v, int *n, int valor){
     if(*n >= MAX){
         printf("Vetor cheio!\n");
@@ -16,17 +15,19 @@ void inserirOrdenado(int *v, int *n, int valor){
     (*n)++;
 }
 
+
 int buscaBinaria(int *v, int n, int valor){
     int ini=0, fim=n-1;
     while(ini<=fim){
         int meio=(ini+fim)/2;
         if(v[meio]==valor) return meio;
-        if(v[meio]<valor) ini=meio+1; else fim=meio-1;
+        if(v[meio]<valor) ini=meio+1;
+        else fim=meio-1;
     }
     return -1;
 }
 
-// Remove um elemento (se existir)
+
 void removerElemento(int *v, int *n, int valor){
     int pos = buscaBinaria(v, *n, valor);
     if(pos==-1){
@@ -39,11 +40,16 @@ void removerElemento(int *v, int *n, int valor){
     printf("Removido.\n");
 }
 
+
 void imprimir(int *v, int n){
-    if(n==0){ printf("Vetor vazio\n"); return; }
+    if(n==0){
+        printf("Vetor vazio\n");
+        return;
+    }
     for(int i=0;i<n;i++) printf("%d ", v[i]);
     printf("\n");
 }
+
 
 int main(){
     int v[MAX];
@@ -63,30 +69,34 @@ int main(){
     do{
         printf("\n1-Imprimir\n2-Consultar\n3-Remover\n4-Inserir\n5-Sair\nOpcao: ");
         scanf("%d",&op);
-        switch(op){
-            case 1: imprimir(v,n); break;
-            case 2:
-                printf("Valor: ");
-                scanf("%d",&x);
-                x = buscaBinaria(v,n,x);
-                printf("%d\n", x);
-                break;
-            case 3:
-                printf("Valor: ");
-                scanf("%d",&x);
-                removerElemento(v,&n,x);
-                break;
-            case 4:
-                printf("Valor: ");
-                scanf("%d",&x);
-                inserirOrdenado(v,&n,x);
-                break;
-            case 5:
-                printf("Encerrando.\n");
-                break;
-            default:
-                printf("Opcao invalida.\n");
+
+        if(op == 1){
+            imprimir(v,n);
         }
-    }while(op!=5);
+        else if(op == 2){
+            printf("Valor: ");
+            scanf("%d",&x);
+            x = buscaBinaria(v,n,x);
+            printf("%d\n", x);
+        }
+        else if(op == 3){
+            printf("Valor: ");
+            scanf("%d",&x);
+            removerElemento(v,&n,x);
+        }
+        else if(op == 4){
+            printf("Valor: ");
+            scanf("%d",&x);
+            inserirOrdenado(v,&n,x);
+        }
+        else if(op == 5){
+            printf("Encerrando.\n");
+        }
+        else{
+            printf("Opcao invalida.\n");
+        }
+
+    }while(op != 5);
+
     return 0;
 }
