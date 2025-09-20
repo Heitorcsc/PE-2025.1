@@ -1,5 +1,4 @@
 #include <stdio.h>
-#define TAM 30
 
 void preencherVetor(int v[], int n);
 void imprimirVetor(int v[], int n);
