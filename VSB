@@ -1,0 +1,61 @@
+#include <stdio.h>
+#define TAM_VETOR 40
+
+void cadastrarProduto()
+
+
+
+int main(){
+    int opcao;
+
+
+
+
+
+
+
+
+
+
+ do {
+    printf("\n\nMENU\n");
+    printf("1 - Cadastrar novo produto\n");
+    printf("2 - Alterar valor unitário\n");
+    printf("3 - Informar valor unitário\n");
+    printf("4 - Informar a auantidade de produto em estoque \n");
+    printf("5 - Valor a ser pago\n");
+    printf("6 - Atualizar estoque\n");
+    printf("7 - Código e descrição do produto\n");
+    printf("8 - Descrição de produto sem estoque\n");
+    printf("Digite a sua opção (0 p/ finalizar): ");
+    scanf("%d", &opcao);
+    switch (opcao) {
+      case 1:
+        inserirFinalArquivo(nomeArq);
+        break;
+      case 2:
+        printf("---------------- Listagem ----------------\n");
+        listarArquivo(nomeArq);
+        printf("------------------------------------------\n");
+        break;
+      case 3:
+        lerPosicaoEspecifica(nomeArq);
+        break;
+      case 4:
+        buscarNumero(nomeArq);
+        break;
+      case 5:
+        substituirNumero(nomeArq);
+        break;
+      case 6:
+        excluirNumero(nomeArq);
+        break;
+      default:
+        if (opcao != 0)
+          printf("Opção inválida!\n");
+    }
+} while (opcao != 0);
+
+  return 0;
+}
+ 
