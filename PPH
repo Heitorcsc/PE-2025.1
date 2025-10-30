@@ -5,3 +5,5 @@ struct tipoAluno{
     float media;
     int faltas;
 };
+
+// ordenação ,busca  e busca binaria 
