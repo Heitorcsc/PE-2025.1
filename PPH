@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+struct tipoAluno{
+    char nome[30];
+    float media;
+    int faltas;
+};
