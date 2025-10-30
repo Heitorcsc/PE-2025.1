@@ -9,7 +9,7 @@ void inserirFinalArquivo(char nomeArq[]);
 void listarArquivo(char nomeArq[]);
 void lerPosicaoEspecifica(char nomeArq[]);
 
-/* novas funções pedidas */
+
 void buscarNumero(char nomeArq[]);
 void substituirNumero(char nomeArq[]);
 void excluirNumero(char nomeArq[]);
