@@ -1,61 +1,126 @@
 #include <stdio.h>
-#define TAM_VETOR 40
+#include <string.h>
 
-void cadastrarProduto()
+#define MAX_PROD 40
+#define DESC_LEN 100
 
+typedef struct{
+  int codigo;
+  char descricao[DESC_LEN];
+  double valorUnitario;
+  int quantidade;
+} Produto;
 
+int buscarProduto(Produto produtos[], int n, int codigo);
+void cadastrarProduto(Produto produtos[], int n);
+void alterarValor(Produto produtos[], int n, int codigo, double novoValor);
+double valorUnitario(Produto produtos[], int n, int codigo);
+int quantidadeEstoque(Produto produtos[], int n, int codigo);
+void vendaProduto(Produto produtos[], int n, int codigo, int qtdDesejada);
+void atualizarEstoque(Produto produtos[], int n, int codigo, int novaQtd);
+void exibirTodos(Produto produtos[], int n);
+void exibirSemEstoque(Produto produtos[], int n);
+void limparBuffer();
+void lerString(char *s, int tam);
 
-int main(){
-    int opcao;
+int main() {
+    Produto produtos[MAX_PROD] = {0};
+    int opcao, codigo, qtd;
+    double valor;
 
+    do {
+        printf("\n\nMENU\n");
+        printf("1 - Cadastrar novo produto\n");
+        printf("2 - Alterar valor unitário\n");
+        printf("3 - Informar valor unitário\n");
+        printf("4 - Informar a quantidade de produto em estoque\n");
+        printf("5 - Valor a ser pago\n");
+        printf("6 - Atualizar estoque\n");
+        printf("7 - Código e descrição do produto\n");
+        printf("8 - Descrição de produto sem estoque\n");
+        printf("Digite a sua opção (0 p/ finalizar): ");
+        scanf("%d", &opcao);
+        limparBuffer();
 
+        switch(opcao) {
+            case 1:
+                cadastrarProduto(produtos, MAX_PROD);
+                break;
+            case 2:
+                printf("Código: ");
+                scanf("%d", &codigo);
+                printf("Novo valor unitário: ");
+                scanf("%lf", &valor);
+                alterarValor(produtos, MAX_PROD, codigo, valor);
+                break;
+            case 3:
+                printf("Código: ");
+                scanf("%d", &codigo);
+                valor = valorUnitario(produtos, MAX_PROD, codigo);
+                if (valor >= 0)
+                    printf("Valor unitário: R$ %.2f\n", valor);
+                else
+                    printf("Produto não encontrado.\n");
+                break;
+            case 4:
+                printf("Código: ");
+                scanf("%d", &codigo);
+                qtd = quantidadeEstoque(produtos, MAX_PROD, codigo);
+                if (qtd >= 0)
+                    printf("Quantidade em estoque: %d\n", qtd);
+                else
+                    printf("Produto não encontrado.\n");
+                break;
+            case 5:
+                printf("Código: ");
+                scanf("%d", &codigo);
+                printf("Quantidade desejada: ");
+                scanf("%d", &qtd);
+                vendaProduto(produtos, MAX_PROD, codigo, qtd);
+                break;
+            case 6:
+                printf("Código: ");
+                scanf("%d", &codigo);
+                printf("Nova quantidade: ");
+                scanf("%d", &qtd);
+                atualizarEstoque(produtos, MAX_PROD, codigo, qtd);
+                break;
+            case 7:
+                exibirTodos(produtos, MAX_PROD);
+                break;
+            case 8:
+                exibirSemEstoque(produtos, MAX_PROD);
+                break;
+            case 0:
+                printf("Programa finalizado.\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while(opcao != 0);
 
-
-
-
-
-
-
-
- do {
-    printf("\n\nMENU\n");
-    printf("1 - Cadastrar novo produto\n");
-    printf("2 - Alterar valor unitário\n");
-    printf("3 - Informar valor unitário\n");
-    printf("4 - Informar a auantidade de produto em estoque \n");
-    printf("5 - Valor a ser pago\n");
-    printf("6 - Atualizar estoque\n");
-    printf("7 - Código e descrição do produto\n");
-    printf("8 - Descrição de produto sem estoque\n");
-    printf("Digite a sua opção (0 p/ finalizar): ");
-    scanf("%d", &opcao);
-    switch (opcao) {
-      case 1:
-        inserirFinalArquivo(nomeArq);
-        break;
-      case 2:
-        printf("---------------- Listagem ----------------\n");
-        listarArquivo(nomeArq);
-        printf("------------------------------------------\n");
-        break;
-      case 3:
-        lerPosicaoEspecifica(nomeArq);
-        break;
-      case 4:
-        buscarNumero(nomeArq);
-        break;
-      case 5:
-        substituirNumero(nomeArq);
-        break;
-      case 6:
-        excluirNumero(nomeArq);
-        break;
-      default:
-        if (opcao != 0)
-          printf("Opção inválida!\n");
-    }
-} while (opcao != 0);
-
-  return 0;
+    return 0;
 }
- 
+
+int buscarProduto(Produto produtos[], int n, int codigo){
+  for(int i = 0; i < n;i++){
+    if (produtos[i].codigo == codigo){
+       return i;
+    }
+    
+return -1
+
+  }
+
+}
+void cadastrarProduto(Produto produtos[], int n){
+  int i;
+  for(i = 0;i < n;i++){
+    if produtos[i].codigo == 0{
+      break;
+    } else if( i == n{  
+      printf("Limite de produtos atingido\n");     
+    } 
+    return;
+  }
+}
