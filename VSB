@@ -149,8 +149,18 @@ void alterarValor(Produto produtos[], int n, int codigo) {
     printf("Valor atualizado"\n); 
 }
 
-int quantidadeEstoque(Produto produtos[], int n, int codigo){
-    for(int i = 0; i < n; i++){
-        
+int quantidadeEstoque(Produto produtos[], int n, int codigo) {
+    int i = buscarProduto(produtos, n, codigo);
+    if (i == -1) {
+    return -1; 
+} else {
+    return produtos[i].quantidade; 
+ }
+}
+void vendaProduto(Produto produtos[], int n, int codigo, int qtdDesejada){
+    int i = buscarProduto(produtos, n, codigo);
+    if( i == -1){
+        printf("Produto não encontrado.");
+        return;
     }
 }
