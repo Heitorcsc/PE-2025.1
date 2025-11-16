@@ -1,0 +1,35 @@
+#include <stdio.h>
+#define TAM 26
+
+
+typedef struct{
+    char nome[100];
+    int numero;
+    int acidentes;
+} Data;
+
+void ColetarDados(Data dados[], char nome,int numero,int acidentes){
+    for(int i = 0; i < TAM; i++){
+        printf("Digite o nome do estado: ");
+        scanf("%99[^\n]",dados[i].nome);
+        printf("Digite o numero de veículos do estado: ");
+        scanf("%d",&dados[i].numero);
+        printf("Digite o número de acidentes: ");
+        scanf("%d", &dados[i].acidentes);
+    }
+
+
+}
+
+void encontrarMaioreMenor(Data dados[], int *indMaior,int *indMenor,){
+    *indMaior = 0;
+    *indMenor = 0;
+
+    for(int i = 0; i < TAM; i++){
+        if( v[i].acidentes > v[*indMaior].acidentes){
+             *indMaior = i;
+        } else( v[i].acidentes < v[*indMenor].acidentes){
+            *indMenor = i;
+        }
+    }
+}
