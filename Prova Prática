@@ -1,0 +1,140 @@
+// Questão 1 
+
+void cadastrarCategoria(struct Categoria v[], int *qtd){
+
+    if (*qtd >= TAM) {
+        printf("Nao e possivel cadastrar novas categorias.\n");
+        return;
+    }
+
+    struct Categoria novo;
+    int i;
+
+    printf("Digite o codigo da nova categoria: ");
+    scanf("%d", &novo.codigo);
+
+    // verifica duplicidade de codigo
+    for (i = 0; i < *qtd; i++) {
+        if (v[i].codigo == novo.codigo) {
+            printf("Erro: ja existe categoria com esse codigo.\n");
+            return;
+        }
+    }
+
+    printf("Digite o nome da categoria: ");
+    scanf("%s", novo.nome);  
+
+    v[*qtd] = novo;   
+    (*qtd)++;         
+}
+
+// Questão 2 
+
+void imprimirCategorias( struct Categoria v[], int qtd){
+
+    for( int i = 0; i < qtd,i++){
+        printf("Código: %d, Nome %s\n", v[i].codigo,v[i].nome);
+
+    }
+}
+
+
+// Questão 3
+
+void imprimirProdutos(struct Produto vp[], int qtdProdutos,
+                      struct Categoria vc[], int qtdCategorias) {
+
+    for (int i = 0; i < qtdProdutos; i++) {
+
+        printf("Codigo: %d\n", vp[i].codigo);
+        printf("Titulo: %s\n", vp[i].titulo);
+        printf("Descricao: %s\n", vp[i].descricao);
+
+        
+        for (int j = 0; j < qtdCategorias; j++) {
+            if (vp[i].categoria == vc[j].codigo) {
+                printf("Categoria: %s\n", vc[j].nome);
+                break;
+            }
+        }
+
+        double preco = vp[i].preco / 100.0;
+        printf("Preco: R$ %.2f\n", preco);
+
+        
+    }
+}
+
+// Questão 4
+
+void selectionSortPorDescricao(struct Produto v[], int qtd) {
+
+    int i, j, k, min;
+    struct Produto temp;
+
+    for (i = 0; i < qtd - 1; i++) {
+        min = i;
+
+        for (j = i + 1; j < qtd; j++) {
+            k = 0;
+
+            while (v[j].descricao[k] != '\0' &&
+                   v[min].descricao[k] != '\0' &&
+                   v[j].descricao[k] == v[min].descricao[k]) {
+                k++;
+            }
+
+            if (v[j].descricao[k] < v[min].descricao[k]) {
+                min = j;
+            }
+        }
+
+        if (min != i) {
+            temp = v[i];
+            v[i] = v[min];
+            v[min] = temp;
+        }
+    }
+}
+
+
+// Questão 5
+
+
+int BuscabinariaPorDescricao(struct Produto v[], int n, char chave[]){
+    int i = 0;         
+    int f = n - 1;     
+    int meio;          
+    int k, comp;       
+
+    while (i <= f) {
+        meio = (i + f) / 2;   
+        k = 0;
+
+        
+        while (chave[k] != '\0' &&
+               v[meio].descricao[k] != '\0' &&
+               chave[k] == v[meio].descricao[k]) {
+            k++;
+        }
+
+        
+        comp = chave[k] - v[meio].descricao[k];
+
+        if (comp == 0) {
+            
+            return meio;
+        } else if (comp > 0) {
+            
+            i = meio + 1;
+        } else {
+           
+            f = meio - 1;
+        }
+    }
+
+    
+    return -1;
+}
+
+
