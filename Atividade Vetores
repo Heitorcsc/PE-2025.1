@@ -34,10 +34,19 @@ void encontrarMaioreMenor(Data dados[], int *indMaior,int *indMenor,){
     }
 }
 
-void percentualAcidentes(Data dados[]){
+void percentualAcidentes(Data dados[], int tam) {
+    
     double percentual;
-    for(int i = 0; i < tam; i++){
-        percentual = ((double) (dados[i].acidentes / dados[i].numero) * 100);
-        printf("O percentual de acidentes do estado %s foi de %f",dados[i].nome,percentual);
+
+    for(int i = 0; i < tam; i++) {
+        if (dados[i].numero == 0) {
+            percentual = 0.0;
+        } else {
+            percentual = ((double)dados[i].acidentes / dados[i].numero) * 100.0;
+        }
+        
+        
+        printf("Estado: %s | Percentual: %.2f%%\n", dados[i].nome, percentual);
     }
+   
 }
