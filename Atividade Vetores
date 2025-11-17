@@ -11,7 +11,7 @@ void ColetarDados(Data dados[]);
 void encontrarMaioreMenor(Data dados[], int *indMaior, int *indMenor);
 void percentualAcidentes(Data dados[]);
 double Media(Data dados[]);
-void AcimaDaMedia(Data dados[], int TAM, double media);
+void AcimaDaMedia(Data dados[], double media);
 
 int main() {
     Data dados[TAM];
