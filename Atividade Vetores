@@ -7,16 +7,56 @@ typedef struct {
     int acidentes;
 } Data;
 
+void ColetarDados(Data dados[]);
+void encontrarMaioreMenor(Data dados[], int *indMaior, int *indMenor);
+void percentualAcidentes(Data dados[]);
+double Media(Data dados[]);
+void AcimaDaMedia(Data dados[], int TAM, double media);
+
+int main() {
+    Data dados[TAM];
+
+    printf("Coleta de dados de %d estados\n", TAM);
+    ColetarDados(dados);
+
+    int indMaior, indMenor;
+    encontrarMaioreMenor(dados, &indMaior, &indMenor);
+    printf("\nMaior número de acidentes: %s -> %d\n",
+           dados[indMaior].nome, dados[indMaior].acidentes);
+    printf("Menor número de acidentes:  %s -> %d\n",
+           dados[indMenor].nome, dados[indMenor].acidentes);
+
+    percentualAcidentes(dados);
+
+    double media = Media(dados);
+    printf("\nMédia nacional de acidentes: %.2f\n", media);
+
+    AcimaDaMedia(dados, media);
+
+    return 0;
+}
+
+
+
 void ColetarDados(Data dados[]) {
     for (int i = 0; i < TAM; i++) {
+        printf("\n=== Estado %d de %d ===\n", i+1, TAM);
+
         printf("Digite o nome do estado: ");
         scanf(" %99[^\n]", dados[i].nome);
 
         printf("Digite o número de veículos do estado: ");
-        scanf("%d", &dados[i].numero);
+        while (scanf("%d", &dados[i].numero) != 1) {
+            printf("Entrada inválida. Digite um número inteiro para veículos: ");
+            while (getchar() != '\n'); // limpa buffer
+        }
 
         printf("Digite o número de acidentes: ");
-        scanf("%d", &dados[i].acidentes);
+        while (scanf("%d", &dados[i].acidentes) != 1) {
+            printf("Entrada inválida. Digite um número inteiro para acidentes: ");
+            while (getchar() != '\n');
+        }
+        while (getchar() != '\n'); // consome '\n' remanescente antes do próximo nome
     }
 }
 
@@ -35,6 +75,7 @@ void encontrarMaioreMenor(Data dados[], int *indMaior, int *indMenor) {
 }
 
 void percentualAcidentes(Data dados[]) {
+    printf("\nPercentual de acidentes por número de veículos (por estado):\n");
     for (int i = 0; i < TAM; i++) {
         double percentual = 0.0;
 
@@ -42,19 +83,27 @@ void percentualAcidentes(Data dados[]) {
             percentual = ((double)dados[i].acidentes / dados[i].numero) * 100.0;
         }
 
-        printf("Estado: %s | Percentual: %.2f%%\n", dados[i].nome, percentual);
+        printf("%s | Veículos: %d | Acidentes: %d | Percentual: %.4f%%\n",
+               dados[i].nome, dados[i].numero, dados[i].acidentes, percentual);
     }
 }
 
-void Media(Data dados[]) {
+double Media(Data dados[]) {
     int soma = 0;
-    double media;
 
     for (int i = 0; i < TAM; i++) {
         soma += dados[i].acidentes;
     }
 
-    media = (double)soma / TAM;
-
-    printf("A média de acidentes no país é: %.2f\n", media);
+    return (double)soma / TAM;
 }
+
+void AcimaDaMedia(Data dados[], double media) {
+    printf("\nEstados acima da média de acidentes (média = %.2f):\n", media);
+    for (int i = 0; i < TAM; i++) {
+        if (dados[i].acidentes > media) {
+            printf("%s - %d acidentes\n", dados[i].nome, dados[i].acidentes);
+        }
+    }
+}
+
